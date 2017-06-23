@@ -1,74 +1,51 @@
 package com.wx.mytestcase.utils.page.utils;
 
-import android.annotation.TargetApi;
+import android.accessibilityservice.AccessibilityService;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.service.notification.NotificationListenerService;
-import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.RemoteViews;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/6/22 0022.
+ * Created by Administrator on 2017/6/23 0023.
  */
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-public class WeChatNotificationListenerService extends NotificationListenerService {
-    @Override
-    public void onNotificationPosted(StatusBarNotification sbn) {
 
-        // 如果该通知的包名不是微信，那么 pass 掉
-        if (!"com.tencent.mm".equals(sbn.getPackageName())) {
-            return;
-        }
-        Notification notification = sbn.getNotification();
-        if (notification == null) {
-            return;
-        }
-        PendingIntent pendingIntent = null;
-        // 当 API > 18 时，使用 extras 获取通知的详细信息
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Bundle extras = notification.extras;
-            if (extras != null) {
-                // 获取通知标题
-                String title = extras.getString(Notification.EXTRA_TITLE, "");
-                // 获取通知内容
-                String content = extras.getString(Notification.EXTRA_TEXT, "");
-                if (!TextUtils.isEmpty(content) && content.contains("[微信红包]")) {
-                    pendingIntent = notification.contentIntent;
-                }
-            }
-        } else {
-            // 当 API = 18 时，利用反射获取内容字段
+public class WeChatAccessibilityService extends AccessibilityService {
+    @Override
+    public void onAccessibilityEvent(AccessibilityEvent event) {
+        if (Build.VERSION.SDK_INT < 18) {
+            Notification notification = (Notification) event.getParcelableData();
             List<String> textList = getText(notification);
             if (textList != null && textList.size() > 0) {
                 for (String text : textList) {
-                    if (!TextUtils.isEmpty(text) && text.contains("[微信红包]")) {
-                        pendingIntent = notification.contentIntent;
-                        break;
+                    if (!TextUtils.isEmpty(text) &&
+                            text.contains("[微信红包]")) {
+                        final PendingIntent pendingIntent = notification.contentIntent;
+                        try {
+                            if (pendingIntent != null) {
+                                pendingIntent.send();
+                            }
+                        } catch (PendingIntent.CanceledException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    break;
                 }
             }
-            // send pendingIntent to open wechat
-            try {
-                if (pendingIntent != null) {
-                    pendingIntent.send();
-                }
-            } catch (PendingIntent.CanceledException e) {
-                e.printStackTrace();
-            }      }
-
+        }
     }
 
     @Override
-    public void onNotificationRemoved(StatusBarNotification sbn) {
-        super.onNotificationRemoved(sbn);
+    public void onInterrupt() {
+
     }
 
     public List<String> getText(Notification notification) {

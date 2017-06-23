@@ -7,28 +7,13 @@
     android:layout_height="match_parent"
     tools:context="com.wx.mytest.MainActivity"
     android:orientation="vertical">
+
+
     <Button
-        android:onClick="runLogin"
-        android:id="@+id/login"
+        android:id="@+id/auto_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="登录"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp"
-        android:background="#abcdef"
-        android:layout_marginLeft="10px"
-        android:layout_marginTop="20px"/>
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:selectAllOnFocus="true"
-        android:hint="请输入账号"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:selectAllOnFocus="true"
-        android:hint="请输入密码"/>
+        android:text="跳转" />
 
     <Button
         android:onClick="runMyUiautomator"
