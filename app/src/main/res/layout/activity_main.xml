@@ -61,5 +61,16 @@
         android:layout_marginTop="20px"
         android:background="#abcdef"
         />
-
+    <Button
+        android:onClick="startfromapp"
+        android:id="@+id/startfromapp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="从app启动看好友"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="20px"
+        android:background="#abcdef"
+        />
 </LinearLayout>
