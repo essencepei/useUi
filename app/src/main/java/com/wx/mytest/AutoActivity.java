@@ -9,6 +9,8 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.wx.mytest.service.BaseAccessibilityService;
+
 import java.io.File;
 
 public class AutoActivity extends AppCompatActivity {
@@ -28,6 +30,9 @@ public class AutoActivity extends AppCompatActivity {
         BaseAccessibilityService.getInstance().goAccess();
     }
 
+    public void seeFriendCircle(View v){
+
+    }
     public void goApp(View view) {
         Intent intent = mPackageManager.getLaunchIntentForPackage("com.tencent.mm");
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

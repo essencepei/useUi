@@ -1,4 +1,4 @@
-package com.wx.mytest;
+package com.wx.mytest.service;
 
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;

