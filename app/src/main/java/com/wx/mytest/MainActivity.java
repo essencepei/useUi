@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.wx.mytest.utils.CMDUtils;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -54,12 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String command = "am instrument --user 0 -w -r   -e debug false -e class com.wx.mytestcase.OpenWx com.wx.mytestcase.test/android.support.test.runner.AndroidJUnitRunner";
         execRootCmd(command);
     }
-
-    public void startfromapp(View v){
-        String command = "am instrument --user 0 -w -r   -e debug false -e class com.wx.mytest.OpenWx com.wx.mytest.test/android.support.test.runner.AndroidJUnitRunner";
-        execRootCmd(command);
-    }
-
     public void addFromPhone(View v) {
         Log.i(TAG, "runAddFromPhone: ");
         String command = "am instrument --user 0 -w -r   -e debug false -e class com.wx.mytestcase.OpenWx com.wx.mytestcase.test/android.support.test.runner.AndroidJUnitRunner";
