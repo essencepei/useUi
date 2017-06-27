@@ -9,7 +9,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
@@ -45,7 +44,7 @@ public class AutoReplyAccessibilityService extends BaseAccessibilityService {
                 if (!texts.isEmpty()) {
                     for (CharSequence text : texts) {
                         String content = text.toString();
-                        if (!TextUtils.isEmpty(content)) {
+                        if (content.contains("我通过了你的好友验证请求，现在我们可以开始聊天了")) {
                             locked = false;
                             background = true;
                             notifyWechat(event);
@@ -74,8 +73,7 @@ public class AutoReplyAccessibilityService extends BaseAccessibilityService {
     private void send() {
         AccessibilityNodeInfo nodeInfo = getRootInActiveWindow();
         if (nodeInfo != null) {
-            List<AccessibilityNodeInfo> list = nodeInfo
-                    .findAccessibilityNodeInfosByText("发送");
+            List<AccessibilityNodeInfo> list = nodeInfo.findAccessibilityNodeInfosByText("发送");
             if (list != null && list.size() > 0) {
                 for (AccessibilityNodeInfo n : list) {
                     if (n.getClassName().equals("android.widget.Button") && n.isEnabled()) {
@@ -166,10 +164,10 @@ public class AutoReplyAccessibilityService extends BaseAccessibilityService {
         hasAction = true;
         if (event.getParcelableData() != null && event.getParcelableData() instanceof Notification) {
             Notification notification = (Notification) event.getParcelableData();
-            String content = notification.tickerText.toString();
-            String[] cc = content.split(":");
-            name = cc[0].trim();
-            scontent = cc[1].trim();
+//            String content = notification.tickerText.toString();
+//            String[] cc = content.split(":");
+//            name = cc[0].trim();
+//            scontent = cc[1].trim();
             PendingIntent pendingIntent = notification.contentIntent;
             try {
                 pendingIntent.send();

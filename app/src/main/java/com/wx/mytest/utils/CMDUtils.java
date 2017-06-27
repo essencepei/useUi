@@ -1,4 +1,4 @@
-package com.wx.mytest;
+package com.wx.mytest.utils;
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

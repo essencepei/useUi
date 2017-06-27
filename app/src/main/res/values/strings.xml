@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">MyTest</string>
-    <string name="clean">清理后台进程</string>
-    <string name="demo">Demo</string>
+
     <string name="reply">自动回复</string>
-    <string name="install">自动安装</string>
-    <string name="defense">防卸载</string>
-    <string name="browser">劫持浏览器</string>
+    <string name="friends">查看好友信息</string>
 </resources>
