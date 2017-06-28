@@ -1,101 +1,102 @@
 package com.wx.mytestcase;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.Direction;
+import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiSelector;
-import android.support.test.uiautomator.Until;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/6/16 0016.
  */
 @RunWith(AndroidJUnit4.class)
-public class OpenWx {
-    private UiDevice mUIDevice = null;
-    private Context mContext = null;
-    String APP = "com.tencent.mm";
+public class OpenWx extends  Base{
+//    private UiDevice mUIDevice = null;
+//    private Context mContext = null;
+//    String APP = "com.tencent.mm";
+//    Boolean Flag = true;
 
-    @Before
-    public void setUp() throws Exception{
-        mUIDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());  //获得device对象
-        mContext = InstrumentationRegistry.getContext();
-
-        if(!mUIDevice.isScreenOn()){  //唤醒屏幕
-            mUIDevice.wakeUp();
-        }
-        mUIDevice.pressHome();  //按home键
-    }
-    @After
-    public void tearDown(){
-        try {
-            mUIDevice.executeShellCommand("am force-stop com.tencent.mm");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
     @Test
-    public void openWX(){
-        Log.i("start","start....");
-        Intent myIntent = mContext.getPackageManager().getLaunchIntentForPackage(APP);  //启动app
-        mContext.startActivity(myIntent);
-//        mUIDevice.waitForWindowUpdate(APP, 5 * 1000);
-//        mUIDevice.waitForWindowUpdate(APP, 5 * 1000);
-        mUIDevice.wait(Until.findObject(By.text("通讯录")), 20000);
+    public void openWX() {
+        Log.i("start", "start....");
+
         UiObject2 tongxunlu = mUIDevice.findObject(By.text("通讯录"));   //定位通讯录搜索
+        List<Map<String, String>> usersinfo = new ArrayList<>();
+
         try {
-            tongxunlu.click();  //点击按键
-        }catch (Exception e){
+            tongxunlu.click();  //进入通讯录列表
+            getUsersInfo(usersinfo);
+            //循环完通讯录之后双击顶部，回到顶部
+//            UiObject top = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/h5"));
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        UiObject2 listview = mUIDevice.findObject(By.clazz(ListView.class));
-        List<UiObject2> friends = listview.findObjects(By.clazz(View.class));
-        String name = null;
-        for (UiObject2 friend:friends){
-            name = friend.getText();
-            friend.click();
-            try{
-                mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/h4")).click();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-        }
-
-        UiObject2 faxian = mUIDevice.findObject(By.text("发现"));   //定位通讯录搜索
-        try {
-            faxian.click();  //点击按键
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        UiObject2 wo = mUIDevice.findObject(By.text("我"));   //定位通讯录搜索
-        try {
-            wo.click();  //点击按键
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        UiObject2 wx = mUIDevice.findObject(By.text("微信"));   //定位通讯录搜索
-        try {
-            wx.click();  //点击按键
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
     }
 
+    public void getUsersInfo(List<Map<String, String>> usersinfo) throws Exception {
+        UiObject2 listview = mUIDevice.findObject(By.clazz(ListView.class));
+        List<UiObject2> friends = listview.findObjects(By.clazz(View.class));
+        UiObject bottom = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/ae8"));
+        for (UiObject2 friend : friends) {
+//            在通讯录列表点击用户名字
+            friend.click();
+//            从用户详细页面获取用户信息
+            usersinfo.add(getUserInfo());
+        }
+        if(!bottom.exists()){
+            listview.scroll(Direction.DOWN, 1f, 500);
+            getUsersInfo(usersinfo);
+        }
+
+//           滑动，再取用户数据
+//        UiScrollable listScrollable = new UiScrollable(new UiSelector().scrollable(true));
+//        if (listScrollable.scrollForward()) {
+//            getUsersInfo(usersinfo);
+//        } else {
+//            if (Flag) {
+//                Flag = false;
+//                getUsersInfo(usersinfo);
+//            } else {
+//                return;
+//            }
+//        }
+    }
+
+
+    public Map<String, String> getUserInfo() {
+        Map<String, String> userinfo = new HashMap<>();
+        try {
+            UiObject usernameObj = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/mh"));
+            UiObject wxNObj = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/aeq"));
+            UiObject nickObj = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/af0"));
+            UiObject areaObj = mUIDevice.findObject(new UiSelector().resourceId("android:id/summary"));
+            UiObject goback = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/h4"));
+            String username = usernameObj.exists() ? usernameObj.getText() : "";
+            String wxNo = wxNObj.exists() ? wxNObj.getText() : "";
+            String nickname = nickObj.exists() ? nickObj.getText() : "";
+            String area = areaObj.exists() ? areaObj.getText() : "";
+            userinfo.put("username", username);
+            userinfo.put("wxNO", wxNo);
+            userinfo.put("nickname", nickname);
+            userinfo.put("area", area);
+            goback.click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userinfo;
+    }
 }
