@@ -55,6 +55,7 @@ public class AutoReplyAccessibilityService extends BaseAccessibilityService {
             case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED:
                 if (!hasAction) break;
                 itemNodeinfo = null;
+//                activityname
                 String className = event.getClassName().toString();
                 if (className.equals("com.tencent.mm.ui.LauncherUI")) {
                     if (fill()) {
@@ -82,8 +83,7 @@ public class AutoReplyAccessibilityService extends BaseAccessibilityService {
                 }
 
             } else {
-                List<AccessibilityNodeInfo> liste = nodeInfo
-                        .findAccessibilityNodeInfosByText("Send");
+                List<AccessibilityNodeInfo> liste = nodeInfo.findAccessibilityNodeInfosByText("Send");
                 if (liste != null && liste.size() > 0) {
                     for (AccessibilityNodeInfo n : liste) {
                         if (n.getClassName().equals("android.widget.Button") && n.isEnabled()) {
