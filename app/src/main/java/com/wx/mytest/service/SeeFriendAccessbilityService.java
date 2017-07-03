@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,39 +28,69 @@ public class SeeFriendAccessbilityService extends BaseAccessibilityService{
 //    点击通讯录
     @SuppressLint("NewApi")
     private void openTXL() {
+        List<Map<String, String>> usersinfo = new ArrayList<>();
         AccessibilityNodeInfo nodeInfo = getRootInActiveWindow();
+        int wxWindowId = nodeInfo.getWindowId();
+        System.out.println("---------微信聊天窗口"+wxWindowId);
 
-        if (nodeInfo != null) {
-            List<AccessibilityNodeInfo> list = nodeInfo.findAccessibilityNodeInfosByText("通讯录");
-            if (list != null && list.size() > 0) {
-                for (AccessibilityNodeInfo n : list) {
-                    if (n.getClassName().equals("android.widget.TextView")) {
-                        AccessibilityNodeInfo parent =n.getParent();
-                        while(parent != null){
-                            if(parent.isClickable()){
-                                performViewClick(parent);
-//                                查看朋友信息
-                                seeFriends ();
-                                break;
-                            }
-                            parent = parent.getParent();
-                        }
-                    }
-                }
-            }
-        }
+        clickTextViewByText("发现");
+
+        clickTextViewByText("朋友圈");
+        AccessibilityNodeInfo nodeInfo21 = getRootInActiveWindow();
+        int pyqWindowId = nodeInfo21.getWindowId();
+        System.out.println("-------发现窗口id"+pyqWindowId);
+        AccessibilityNodeInfo back = nodeInfo21.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/h4").get(0);
+        performViewClick(back);
+
+
+
+//        seeFriends (usersinfo);
     }
 //顺序点击好友
-    public void seeFriends (){
+    public void seeFriends (List<Map<String, String>> usersinfo){
         AccessibilityNodeInfo nodeInfo = getRootInActiveWindow();
-        List<AccessibilityNodeInfo> listView = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/hy");
-        AccessibilityNodeInfo first = listView.get(0).getChild(1);
 
-//            打开个人信息页面
-        getFriendsInfo();
-//            个人信息页面点击返回到通讯录列表页面
-        goback();
+        int txlWindowId = nodeInfo.getWindowId();
+        System.out.println("---------通讯录id"+txlWindowId);
 
+        AccessibilityNodeInfo listView = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/hy").get(0);
+
+        int childcount = listView.getChildCount();
+        for(int i =1 ;i<childcount;i++){
+            AccessibilityNodeInfo user = listView.getChild(i);
+            System.out.println("看一下是啥"+user.getClassName().toString());
+                performViewClick(user);
+                usersinfo.add(getUserInfo());
+
+        }
+//        if (!bottom.exists()) {
+//            listview.scroll(Direction.DOWN, 1f, 500);
+//            getUsersInfo(usersinfo);
+//        }
+    }
+
+    public Map<String, String> getUserInfo(){
+        AccessibilityNodeInfo nodeInfo = getRootInActiveWindow();
+        int userInfoWindowId = nodeInfo.getWindowId();
+        System.out.println("---------用户详细信息window id"+userInfoWindowId);
+        Map<String, String> userinfo = new HashMap<>();
+        AccessibilityNodeInfo mh = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/mh").get(0);
+        AccessibilityNodeInfo aeq = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/aeq").get(0);
+        AccessibilityNodeInfo af0 = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/af0").get(0);
+        AccessibilityNodeInfo summary = nodeInfo.findAccessibilityNodeInfosByViewId("android:id/summary").get(0);
+        AccessibilityNodeInfo h4 = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/h4").get(0);
+
+        String username = (mh!=null) ? mh.getText().toString() : "";
+        String wxNo = (aeq!=null) ? aeq.getText().toString() : "";
+        String nickname = (af0!=null) ? af0.getText().toString() : "";
+        String area = (summary!=null) ? summary.getText().toString() : "";
+        userinfo.put("username",username);
+        userinfo.put("wxNo",wxNo);
+        userinfo.put("nickname",nickname);
+        userinfo.put("area",area);
+        performViewClick(h4);
+
+        return userinfo;
     }
 //个人信息页面返回
     public  void goback(){

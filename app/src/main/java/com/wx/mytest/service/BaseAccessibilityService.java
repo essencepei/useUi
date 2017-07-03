@@ -170,7 +170,7 @@ public class BaseAccessibilityService extends AccessibilityService {
         }
         return null;
     }
-
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void clickTextViewByText(String text) {
         AccessibilityNodeInfo accessibilityNodeInfo = getRootInActiveWindow();
         if (accessibilityNodeInfo == null) {

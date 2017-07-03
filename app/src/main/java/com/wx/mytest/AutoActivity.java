@@ -35,6 +35,8 @@ public class AutoActivity extends AppCompatActivity {
     }
     public void goApp(View view) {
         Intent intent = mPackageManager.getLaunchIntentForPackage("com.tencent.mm");
+//        intent = new Intent("com.tencent.mm.ui.LauncherUI",SecondActivity.class);
+
 //        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
