@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 
 import org.junit.After;
@@ -18,6 +20,22 @@ public class Base {
     protected UiDevice mUIDevice = null;
     protected Context mContext = null;
     String APP = "com.tencent.mm";
+    public void findTextAndClick(String text){
+        mUIDevice.findObject(By.text(text)).click();
+    }
+
+    public void findIdAndClick(String id){
+        UiObject obj = mUIDevice.findObject(new UiSelector().resourceId(id));
+        if(obj.exists()){
+            try {
+                obj.click();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }else {
+            return;
+        }
+    }
 
     @Before
     public void setUp() throws Exception {

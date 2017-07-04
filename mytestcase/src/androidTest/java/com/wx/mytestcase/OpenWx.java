@@ -2,6 +2,7 @@ package com.wx.mytestcase;
 
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Configurator;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
@@ -22,7 +23,7 @@ import java.util.Map;
  * Created by Administrator on 2017/6/16 0016.
  */
 @RunWith(AndroidJUnit4.class)
-public class OpenWx extends  Base{
+public class OpenWx extends Base {
 //    private UiDevice mUIDevice = null;
 //    private Context mContext = null;
 //    String APP = "com.tencent.mm";
@@ -41,7 +42,10 @@ public class OpenWx extends  Base{
             getUsersInfo(usersinfo);
             //循环完通讯录之后双击顶部，回到顶部
 //            UiObject top = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/h5"));
-
+            Configurator.getInstance().setActionAcknowledgmentTimeout(0);
+            UiObject top = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/h5"));
+            top.click();
+            top.click();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,7 +61,7 @@ public class OpenWx extends  Base{
 //            从用户详细页面获取用户信息
             usersinfo.add(getUserInfo());
         }
-        if(!bottom.exists()){
+        if (!bottom.exists()) {
             listview.scroll(Direction.DOWN, 1f, 500);
             getUsersInfo(usersinfo);
         }
