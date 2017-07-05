@@ -6,6 +6,9 @@ import com.wx.mytestcase.actions.AddFriendPageAction;
 import com.wx.mytestcase.actions.MainPageAction;
 import com.wx.mytestcase.actions.MorePageAction;
 import com.wx.mytestcase.actions.SouSuoPageAction;
+import com.wx.mytestcase.actions.UserDetailInfoPageAction;
+import com.wx.mytestcase.actions.VerifyApplyPageAction;
+import com.wx.mytestcase.pages.UserDetailInfoPage;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,11 +24,21 @@ public class TestBasePage extends Base {
         MorePageAction mpc1= new MorePageAction();
         AddFriendPageAction afpa = new AddFriendPageAction();
         SouSuoPageAction sspa = new SouSuoPageAction();
+        UserDetailInfoPage  userpage = new UserDetailInfoPage();
+        UserDetailInfoPageAction  udipa = new UserDetailInfoPageAction();
+        VerifyApplyPageAction verifya = new VerifyApplyPageAction();
 
         mpc.goMoreAndWaitUntilNewWindow();
         mpc1.goTjpy();
         afpa.goSousuo();
         sspa.goSearch("13657296691");
+        if(userpage.tjdtxl().exists()){
+            udipa.addToTxl();
+            verifya.goBack();
+        }
+        udipa.goBack();
+        sspa.goBack();
+        afpa.goBack();
 
     }
 }

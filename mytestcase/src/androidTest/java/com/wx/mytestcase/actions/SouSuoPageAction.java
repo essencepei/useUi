@@ -19,4 +19,11 @@ public class SouSuoPageAction {
             e.printStackTrace();
         }
     }
+    public void goBack(){
+        try {
+            ssp.back().click();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

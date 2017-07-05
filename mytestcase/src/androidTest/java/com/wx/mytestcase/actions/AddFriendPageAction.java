@@ -26,4 +26,8 @@ public class AddFriendPageAction {
     public void goMdmjq(){
         add.mdmjq().clickAndWait(Until.newWindow(),2000);
     }
+
+    public void goBack(){
+        add.back().click();
+    }
 }

@@ -24,4 +24,7 @@ public class AddFriendPage extends BasePage {
     public UiObject2 sjlxr(){
         return mUIDevice.findObject(By.text("手机联系人"));
     }
+    public UiObject2 back(){
+        return  mUIDevice.findObject(By.desc("返回"));
+    }
 }
