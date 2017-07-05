@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">MyTestCase</string>
     <string name="service_name">WeChatNotificationListenerService</string>
-    <string name="qianghongbao">qianghongbao</string>
+
 </resources>
