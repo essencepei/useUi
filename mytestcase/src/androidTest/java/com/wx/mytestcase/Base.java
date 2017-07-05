@@ -20,8 +20,13 @@ public class Base {
     protected UiDevice mUIDevice = null;
     protected Context mContext = null;
     String APP = "com.tencent.mm";
+
     public void findTextAndClick(String text){
         mUIDevice.findObject(By.text(text)).click();
+    }
+
+    public void ClickAndWait(String text){
+        mUIDevice.findObject(By.text(text)).clickAndWait(Until.newWindow(),2000);
     }
 
     public void findIdAndClick(String id){

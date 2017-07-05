@@ -1,4 +1,4 @@
-package com.wx.mytestcase.utils.page.utils;
+package com.wx.mytestcase.utils;
 
 import android.annotation.TargetApi;
 import android.app.Notification;

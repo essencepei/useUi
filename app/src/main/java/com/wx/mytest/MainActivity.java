@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     public void seeCircle(View v) {
         Log.i(TAG, "runSeeCircle: ");
-        String command = "am instrument --user 0 -w -r   -e debug false -e class com.wx.mytestcase.OpenWx com.wx.mytestcase.test/android.support.test.runner.AndroidJUnitRunner";
+        String command = "am instrument --user 0 -w -r   -e debug false -e class com.wx.mytestcase.SeeFriendCirecle#friendcircle com.wx.mytestcase.test/android.support.test.runner.AndroidJUnitRunner";
         execRootCmd(command);
     }
     public void addFromPhone(View v) {

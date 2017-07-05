@@ -1,4 +1,4 @@
-package com.wx.mytestcase.utils.page.bases;
+package com.wx.mytestcase.bases;
 
 import android.app.Instrumentation;
 import android.support.test.InstrumentationRegistry;

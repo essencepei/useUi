@@ -1,16 +1,15 @@
-package com.wx.mytestcase.utils.page.pages;
+package com.wx.mytestcase.pages;
 
-import android.support.test.InstrumentationRegistry;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
+import com.wx.mytestcase.bases.BasePage;
 
 /**
  * Created by Administrator on 2017/6/20 0020.
  */
 
-public class FirstPage {
-    private UiDevice mUIDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+public class FirstPage extends BasePage {
+
     public UiObject2 loginButton(){
         return  mUIDevice.findObject(By.text("登录"));
     }

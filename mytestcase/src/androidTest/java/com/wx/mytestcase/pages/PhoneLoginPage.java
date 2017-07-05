@@ -1,4 +1,4 @@
-package com.wx.mytestcase.utils.page.pages;
+package com.wx.mytestcase.pages;
 
 import android.support.test.InstrumentationRegistry;
 import android.support.test.uiautomator.By;
