@@ -1,9 +1,7 @@
 package com.wx.mytestcase.pages;
 
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
-import android.support.test.uiautomator.UiSelector;
 
 import com.wx.mytestcase.bases.BasePage;
 
@@ -20,15 +18,15 @@ public class VerifyApplyPage extends BasePage {
         return mUIDevice.findObject(By.text("发送"));
     }
 
-    public UiObject verifycontent(){
-        return mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/ce8"));
+    public UiObject2 verifycontent(){
+        return mUIDevice.findObject(By.res("com.tencent.mm:id/ce8"));
     }
 
-    public UiObject note(){
-        return mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/ceb"));
+    public UiObject2 note(){
+        return mUIDevice.findObject(By.res("com.tencent.mm:id/ceb"));
     }
 
-    public UiObject isSeePyq(){
-        return mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/fx"));
+    public UiObject2 isSeePyq(){
+        return mUIDevice.findObject(By.res("com.tencent.mm:id/fx"));
     }
 }

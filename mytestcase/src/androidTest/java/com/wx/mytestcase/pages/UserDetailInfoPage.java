@@ -1,7 +1,7 @@
 package com.wx.mytestcase.pages;
 
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiSelector;
+import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject2;
 
 import com.wx.mytestcase.bases.BasePage;
 
@@ -10,27 +10,27 @@ import com.wx.mytestcase.bases.BasePage;
  */
 
 public class UserDetailInfoPage extends BasePage {
-    public UiObject wxName(){
-        return  mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/mh"));
+    public UiObject2 wxName(){
+        return  mUIDevice.findObject(By.res("com.tencent.mm:id/hu"));
     }
 
-    public UiObject wxNo(){
-        return  mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/aeq"));
+    public UiObject2 wxNo(){
+        return  mUIDevice.findObject(By.res("com.tencent.mm:id/a7w"));
     }
 
-    public UiObject nickname(){
-        return  mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/af0"));
+    public UiObject2 nickname(){
+        return  mUIDevice.findObject(By.res("com.tencent.mm:id/a86"));
     }
 
-    public UiObject area(){
-        return  mUIDevice.findObject(new UiSelector().resourceId("android:id/summary"));
+    public UiObject2 area(){
+        return  mUIDevice.findObject(By.res("android:id/summary"));
     }
 
-    public UiObject back(){
-        return  mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/h4"));
+    public UiObject2 back(){
+        return  mUIDevice.findObject(By.desc("返回"));
     }
 
-    public UiObject tjdtxl(){
-        return  mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/aej"));
+    public UiObject2 tjdtxl(){
+        return  mUIDevice.findObject(By.text("添加到通讯录"));
     }
 }
