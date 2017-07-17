@@ -70,18 +70,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void runMyUiautomator(View v) {
         Log.i(TAG, "runMyUiautomator: ");
 //        String command ="am instrument --user 0 -w -r   -e debug false -e class com.wx.mytestcase.OpenSettings com.wx.mytestcase.test/android.support.test.runner.AndroidJUnitRunner";
-/*        String command = "am start -n com.tencent.mm/.ui.LauncherUI";
+/*
+        String command = "am start -n com.tencent.mm/.ui.LauncherUI";
          try {
                     Runtime.getRuntime().exec(command);
                 }catch (Exception e){
-                    System.out.println("完了");
                     e.printStackTrace();
-                }*/
+                }
+*/
 //                UiautomatorThread uimator = new UiautomatorThread();
 //                uimator.start();
 
         String command = "am instrument --user 0 -w -r   -e debug false -e class com.wx.mytestcase.OpenWx com.wx.mytestcase.test/android.support.test.runner.AndroidJUnitRunner";
-
+//        String command = "am start -n com.tencent.mm/.ui.LauncherUI";
         execRootCmd(command);
     }
     /**
@@ -107,19 +108,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          * @return
          */
         public String generateCommand(String pkgName, String clsName, String mtdName) {
-            String command = "am instrument  --user 0 -w -r   -e debug false -e class "
+            String command = "am instrument  --user 0 -w -r   -e debug false -e class"
                     + pkgName + "." + clsName + "#" + mtdName + " "
                     + pkgName + ".test/android.support.test.runner.AndroidJUnitRunner";
             Log.e("test1: ", command);
             return command;
-        }
-    }
-
-    class myThread extends  Thread{
-        @Override
-        public void run() {
-            super.run();
-            System.out.println("線程啟動成功");
         }
     }
 

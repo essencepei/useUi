@@ -26,20 +26,20 @@ public class OpenWx extends Base {
 
     @Test
     public void openWX() {
+
         Log.i("start", "start....");
-
         UiObject2 tongxunlu = mUIDevice.findObject(By.text("通讯录"));   //定位通讯录搜索
-        List<Map<String, String>> usersinfo = new ArrayList<>();
 
+        List<Map<String, String>> usersinfo = new ArrayList<>();
         try {
             tongxunlu.click();  //进入通讯录列表
             getUsersInfo(usersinfo);
             //循环完通讯录之后双击顶部，回到顶部
 //            UiObject top = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/h5"));
             Configurator.getInstance().setActionAcknowledgmentTimeout(0);
-//            UiObject top = mUIDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/h5"));
-//            top.click();
-//            top.click();
+            UiObject2 top = mUIDevice.findObject(By.res("com.tencent.mm:id/h5"));
+            top.click();
+            top.click();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,7 +74,7 @@ public class OpenWx extends Base {
 
 
     public Map<String, String> getUserInfo() {
-        Map<String, String> userinfo = new HashMap<>();
+        Map<String, String> userInfo = new HashMap<>();
         UiObject2 usernameObj = mUIDevice.findObject(By.res("com.tencent.mm:id/hu"));
         UiObject2 wxNObj = mUIDevice.findObject(By.res("com.tencent.mm:id/a7w"));
         UiObject2 nickObj = mUIDevice.findObject(By.res("com.tencent.mm:id/a86"));
@@ -84,11 +84,11 @@ public class OpenWx extends Base {
         String wxNo = mUIDevice.hasObject(By.res("com.tencent.mm:id/a7w")) ? wxNObj.getText() : "";
         String nickname = mUIDevice.hasObject(By.res("com.tencent.mm:id/a86")) ? nickObj.getText() : "";
         String area = mUIDevice.hasObject(By.res("android:id/summary"))? areaObj.getText() : "";
-        userinfo.put("username", username);
-        userinfo.put("wxNO", wxNo);
-        userinfo.put("nickname", nickname);
-        userinfo.put("area", area);
+        userInfo.put("username", username);
+        userInfo.put("wxNO", wxNo);
+        userInfo.put("nickname", nickname);
+        userInfo.put("area", area);
         goback.clickAndWait(Until.newWindow(),5000);
-        return userinfo;
+        return userInfo;
     }
 }

@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wx.mytestcase">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
@@ -9,13 +10,5 @@
         android:supportsRtl="true" android:theme="@style/AppTheme">
     </application>
 
-    //添加NotificationListenerService
-    <service android:name=".WeChatNotificationListenerService"
-        android:label="@string/service_name"
-        android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
-        <intent-filter>
-            <action android:name="android.service.notification.NotificationListenerService" />
-        </intent-filter>
-    </service>
 
 </manifest>

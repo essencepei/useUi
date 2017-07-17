@@ -47,18 +47,18 @@ public class TestClass01 {
         testContext.startActivity(i1);
 
         //通过目标Context来启动拨号功能
-//        Intent i2 = new Intent(Intent.ACTION_CALL,Uri.parse("tel:" + 10086));
-//        i2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent i2 = new Intent(Intent.ACTION_CALL,Uri.parse("tel:" + 10086));
+        i2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        testedContext.startActivity(i2);
-//
-//        Bundle inputBundle = new Bundle();
-//        inputBundle.putString("key", "value");
-//        //注入一个Bundle
-//        InstrumentationRegistry.registerInstance(instrumentation, inputBundle);
-//        //获取运行参数
-//        Bundle outBundle = InstrumentationRegistry.getArguments();
-//        //输出到结果报告中
-//        instrumentation.sendStatus(110,outBundle);
+
+        Bundle inputBundle = new Bundle();
+        inputBundle.putString("key", "value");
+        //注入一个Bundle
+        InstrumentationRegistry.registerInstance(instrumentation, inputBundle);
+        //获取运行参数
+        Bundle outBundle = InstrumentationRegistry.getArguments();
+        //输出到结果报告中
+        instrumentation.sendStatus(110,outBundle);
 
 
     }

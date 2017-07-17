@@ -1,6 +1,6 @@
 package com.wx.mytestcase.actions;
 
-import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.Until;
 
 import com.wx.mytestcase.pages.SouSuoPage;
 
@@ -13,17 +13,9 @@ public class SouSuoPageAction {
     public void goSearch(String searchcontent){
         ssp.sousuoInput().click();
         ssp.sousuoInput().setText(searchcontent);
-        try {
-            ssp.search().clickAndWaitForNewWindow();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-        }
+        ssp.search().clickAndWait(Until.newWindow(),5000);
     }
     public void goBack(){
-        try {
             ssp.back().click();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 }

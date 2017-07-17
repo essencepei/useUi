@@ -5,6 +5,7 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.BySelector;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
+import android.support.test.uiautomator.Until;
 
 import java.util.List;
 
@@ -35,5 +36,8 @@ public class BasePage {
 
     public List<UiObject2> myFindObjects(BySelector by){
         return  mUIDevice.findObjects(by);
+    }
+    public Boolean myWait(BySelector by){
+        return mUIDevice.wait(Until.hasObject(by),2000);
     }
 }

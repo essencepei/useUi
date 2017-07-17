@@ -1,7 +1,6 @@
 package com.wx.mytestcase.actions;
 
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiObject2;
 
 import com.wx.mytestcase.pages.UserDetailInfoPage;
 
@@ -15,38 +14,26 @@ import java.util.Map;
 public class UserDetailInfoPageAction {
     UserDetailInfoPage usp = new UserDetailInfoPage();
     public void addToTxl(){
-        try {
-            usp.tjdtxl().click();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-        }
+        usp.tjdtxl().click();
     }
     public void goBack(){
-        try {
-            usp.back().click();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-        }
+        usp.back().click();
     }
     public Map<String,String> getUserInfoAndBack(){
         Map<String, String> userinfo = new HashMap<>();
-        try{
-        UiObject usernameObj = usp.wxName();
-        UiObject wxNObj = usp.wxNo();
-        UiObject nickObj = usp.nickname();
-        UiObject areaObj = usp.area();
-        String username = usernameObj.exists() ? usernameObj.getText() : "";
-        String wxNo = wxNObj.exists() ? wxNObj.getText() : "";
-        String nickname = nickObj.exists() ? nickObj.getText() : "";
-        String area = areaObj.exists() ? areaObj.getText() : "";
+        UiObject2 usernameObj = usp.wxName();
+        UiObject2 wxNObj = usp.wxNo();
+        UiObject2 nickObj = usp.nickname();
+        UiObject2 areaObj = usp.area();
+        String username =  usp.hasWxName() ? usernameObj.getText() : "";
+        String wxNo = usp.hasWxNO() ? wxNObj.getText() : "";
+        String nickname = usp.hasNickName() ? nickObj.getText() : "";
+        String area = usp.hasArea() ? areaObj.getText() : "";
         userinfo.put("username", username);
         userinfo.put("wxNO", wxNo);
         userinfo.put("nickname", nickname);
         userinfo.put("area", area);
         usp.back().click();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         return userinfo;
     }
 }

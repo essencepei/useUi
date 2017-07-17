@@ -1,8 +1,8 @@
 package com.wx.mytestcase.actions;
 
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
+
 import com.wx.mytestcase.pages.VerifyApplyPage;
 
 /**
@@ -19,20 +19,12 @@ public class VerifyApplyPageAction {
     }
 
     public void verifycontent(String verifycontent){
-        UiObject content = vap.verifycontent();
-        try {
-            content.setText(verifycontent);
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-        }
+        UiObject2 content = vap.verifycontent();
+        content.setText(verifycontent);
     }
 
     public void clearVerify(){
-        UiObject content = vap.verifycontent();
-        try {
-            content.clearTextField();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-        }
+        UiObject2 content = vap.verifycontent();
+        content.clear();
     }
 }
