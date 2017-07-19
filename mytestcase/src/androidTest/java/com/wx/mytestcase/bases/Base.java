@@ -1,4 +1,4 @@
-package com.wx.mytestcase;
+package com.wx.mytestcase.bases;
 
 import android.content.Context;
 import android.content.Intent;

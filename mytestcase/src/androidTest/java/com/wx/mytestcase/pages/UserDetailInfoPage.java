@@ -17,38 +17,43 @@ public class UserDetailInfoPage extends BasePage {
     String areaID ="android:id/summary";
     String backDesc = "返回";
     String addToTXL = "添加到通讯录";
-    BySelector wxname =By.res(wxNameID);
+    BySelector wxName =By.res(wxNameID);
+    BySelector wxNo =By.res(wxNOID);
+    BySelector nickName =By.res(nickNameID);
+    BySelector area =By.res(areaID);
+    BySelector back =By.desc(backDesc);
+    BySelector add =By.res(addToTXL);
 
     public Boolean hasWxName(){
-        return mUIDevice.hasObject(wxname);
+        return mUIDevice.hasObject(wxName);
     }
     public UiObject2 wxName(){
-        return  mUIDevice.findObject(By.res(wxNameID));
+        return  mUIDevice.findObject(wxName);
     }
     public Boolean hasWxNO(){
-        return mUIDevice.hasObject(By.res(wxNOID));
+        return mUIDevice.hasObject(wxNo);
     }
     public UiObject2 wxNo(){
-        return  mUIDevice.findObject(By.res(wxNOID));
+        return  mUIDevice.findObject(wxNo);
     }
     public Boolean hasNickName(){
-        return mUIDevice.hasObject(By.res(nickNameID));
+        return mUIDevice.hasObject(nickName);
     }
     public UiObject2 nickname(){
-        return  mUIDevice.findObject(By.res(nickNameID));
+        return  mUIDevice.findObject(nickName);
     }
     public Boolean hasArea(){
-        return mUIDevice.hasObject(By.res(areaID));
+        return mUIDevice.hasObject(area);
     }
     public UiObject2 area(){
-        return  mUIDevice.findObject(By.res(areaID));
+        return  mUIDevice.findObject(area);
     }
 
     public UiObject2 back(){
-        return  mUIDevice.findObject(By.desc(backDesc));
+        return  mUIDevice.findObject(back);
     }
 
     public UiObject2 tjdtxl(){
-        return  mUIDevice.findObject(By.text(addToTXL));
+        return  mUIDevice.findObject(add);
     }
 }

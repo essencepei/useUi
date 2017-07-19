@@ -1,4 +1,4 @@
-package com.wx.mytestcase;
+package com.wx.mytestcase.cases;
 
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
@@ -8,6 +8,8 @@ import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.widget.TextView;
 
+import com.wx.mytestcase.bases.Base;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
-public class AddFriends extends Base{
+public class AddFriends extends Base {
 
    @Test
     public void add() throws UiObjectNotFoundException {

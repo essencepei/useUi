@@ -1,4 +1,4 @@
-package com.wx.mytestcase;
+package com.wx.mytestcase.cases;
 
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Direction;
@@ -9,6 +9,8 @@ import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.widget.ListView;
 
+import com.wx.mytestcase.bases.Base;
+
 import org.junit.Test;
 
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.List;
  * Created by Administrator on 2017/6/28 0028.
  */
 
-public class SeeFriendCirecle extends Base{
+public class SeeFriendCirecle extends Base {
 
     @Test
     public void friendcircle() throws InterruptedException {
